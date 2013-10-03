@@ -3,7 +3,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>SDM Homework 2</title>
-	<link rel="stylesheet" href="hw2.css" type="text/css"/>
+	<link rel="stylesheet" href="<?=base_url("/css/hw2.css")?>" type="text/css"/>
+	<link rel="stylesheet" href="<?=base_url("/css/bootstrap.min.css")?>">  
+    <link rel="stylesheet" href="<?=base_url("/css/bootstrap-responsive.min.css")?>"> 
 	<style type="text/css">
 	::selection{ background-color: #E13300; color: white; }
 	::moz-selection{ background-color: #E13300; color: white; }
