@@ -36,7 +36,7 @@
             );
 
             $this->db->where('PostID', $articleID);
-            $this->db->update('article', $data);
+            $this->db->update('post', $data);
         }
         function getNewArticles($count = 5){
             $this->db->select("post.*,user.UserID");

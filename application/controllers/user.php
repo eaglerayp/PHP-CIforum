@@ -8,7 +8,6 @@
         }  
       
         public function login(){  
-            session_start();  
             if(isset($_SESSION["user"]) && $_SESSION["user"] != null){ //已經登入的話直接回首頁  
             redirect(site_url("/")); //轉回首頁  
             return true;  
@@ -20,7 +19,6 @@
         }  
 
         public function logining(){
-            session_start();
             if(isset($_SESSION["user"]) && $_SESSION["user"] != null){ //已經登入的話直接回首頁
                 redirect(site_url("/")); //轉回首頁
                 return true;
@@ -47,9 +45,8 @@
             }
  
         public function logout(){
-            session_start();
             session_destroy();
-            redirect(site_url("/user/login")); //轉回登入頁
+            redirect(site_url("/")); //轉回
         }
 
         public function registering(){  

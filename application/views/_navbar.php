@@ -36,21 +36,21 @@
               </ul>
               <!-- login status -->
               <?php 
-               if(!isset($_SESSION["user"])){
+               if(!isset($_SESSION["user"]) || ($_SESSION["user"] == null)){
                 session_start();
                }
                if(isset($_SESSION["user"]) && $_SESSION["user"] != null){ ?>  
               <ul class="nav pull-right">  
               <li><a href="#">Hi <?=$_SESSION["user"]->UserID?></a></li>  
               <li class="divider-vertical"></li>  
-              <li><a href="<?=site_url("user/logout")?>">登出</a></li> 
-              <li><a href="<?=site_url("article/post")?>">發文</a></li> 
+              <li><a href="<?=site_url("user/logout")?>">Log out</a></li> 
+              <li><a href="<?=site_url("article/post")?>">Post</a></li> 
               </ul>  
               <?php }else{ ?>   
               <ul class="nav pull-right">  
-              <li><a href="<?=site_url("user/login")?>">登入</a></li>  
+              <li><a href="<?=site_url("user/login")?>">Sign in</a></li>  
               <li class="divider-vertical"></li>  
-              <li><a href="<?=site_url("user/register")?>">註冊</a></li>  
+              <li><a href="<?=site_url("user/register")?>">Sign up</a></li>  
               </ul>          
               <?php } ?> 
             </div><!--/.nav-collapse -->

@@ -16,7 +16,7 @@
                 return true;      
             }  
             //更新文章計數
-            $this->ArticleModel->updateViews($articleID,$article->Views +1 );
+            $this->ArticleModel->updateViews($articleID,$article->views +1 );
 
             $this->load->view('article_view',Array(  
             //設定網頁標題  
@@ -76,5 +76,22 @@
         public function edit(){  
             $this->load->view('article_edit');      
         }  
-      
+        
+        public function reply(){  
+            $data = array(
+                "userid" => $this->input->post('UserID'),
+                "reply" => $this->input->post('reply'),
+                "postid" => $this->input->post('PostID'),
+            );
+            /*$data = array(
+                "userid" => ($userid) ? $userid : NULL,
+                "reply" => ($reply) ? $reply : NULL,
+                "postid" => ($postid) ? $postid : NULL,
+            );*/
+            $this->load->model("ReplyModel");       
+            $getReply = $this->ReplyModel->insert($data['userid'],$data['reply'],$data['postid']);//完成新增動作到REPLY
+           // $Reply = json_encode($getReply);
+            echo ($getReply);
+        } 
+
     }  
