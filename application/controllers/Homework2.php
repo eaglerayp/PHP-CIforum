@@ -32,7 +32,14 @@ class Homework2 extends CI_Controller {
 		$this->load->model('Model_name','',$config);
 		*/
 
-		$this->load->view('hw2');
+
+		$this->load->model("ArticleModel");
+		$newArticles = $this->ArticleModel->getNewArticles();
+
+		$this->load->view('hw2',
+		Array("pageTitle" => "SDM Hw2",
+		"newArticles" => $newArticles,
+		));
 	}
 }
 
