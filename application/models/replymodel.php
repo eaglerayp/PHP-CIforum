@@ -21,21 +21,25 @@
             if ($query->num_rows() <= 0){  
                 return null; //無資料時回傳 null  
             }  
-             //回傳第一筆  
-            $json = json_encode($query->row());
-            echo $json;
+      
+            return $query->row();  //回傳第一筆  
   	    } 
-
-        public function get($ReplyID){  
+        
+        public function getall($PostID){  
             $this->db->select("*");  
             $this->db->from('reply');   
-            $this->db->where(Array("ReplyID" => $ReplyID));  
+            $this->db->where(Array("PostID" => $PostID));  
             $query = $this->db->get();  
       
             if ($query->num_rows() <= 0){  
                 return null; //無資料時回傳 null  
             }  
-      
-            return $query->row();  //回傳第一筆  
+
+            $b = array();
+            foreach($query->result_array() as $a) {
+            $b[] = $a;
+            }
+            return $b;
+              //回傳全部
         }       
     }  

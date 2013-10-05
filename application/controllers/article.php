@@ -8,8 +8,10 @@
             }  
   
             $this->load->model("ArticleModel");  
+            $this->load->model("ReplyModel");  
             //完成取資料動作  
             $article = $this->ArticleModel->get($articleID);   
+            $reply = $this->ReplyModel->getall($articleID); 
   
             if($article == null){  
                 show_404("Article not found !");  
@@ -21,7 +23,8 @@
             $this->load->view('article_view',Array(  
             //設定網頁標題  
             "pageTitle" => "Post [".$article->Title."] ",   
-            "Post" => $article  
+            "Post" => $article ,
+            "Replies" => $reply
             ));  
         }         
 
@@ -90,8 +93,8 @@
             );*/
             $this->load->model("ReplyModel");       
             $getReply = $this->ReplyModel->insert($data['userid'],$data['reply'],$data['postid']);//完成新增動作到REPLY
-           // $Reply = json_encode($getReply);
-            echo ($getReply);
+            $Reply = json_encode($getReply);
+            echo ($Reply);
         } 
 
     }  

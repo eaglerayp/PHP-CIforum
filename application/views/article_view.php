@@ -1,6 +1,4 @@
     <?php include("_header.php"); ?> 
-
-    <p>This is a paragraph.</p>
     <div class="container article-view">  
         <?php include("_navbar.php") ?>    
         <!-- content -->  
@@ -29,10 +27,32 @@
 
             <legend>Reply</legend>
 
-            <table id="Replies" class="table table-bordered">  
+            <table id="Replies" class="table table-bordered"> 
+                <tr>
+                    <td class="span2">回應者</td>
+                    <td class="span8">回應內容</td>
+                    <td class="span2">回應時間</td>
+                </tr> 
+            <?php
+                
+                foreach ($Replies as $row)
+                { 
+                   echo ("<tr>");
+                   echo '<td class="span2">';
+                   echo ($row["Author"]);
+                   echo "</td>";
+                   echo '<td class="span8">';
+                   echo ($row["Content"]);
+                   echo "</td>";
+                   echo '<td class="span2">';;
+                   echo ($row["Timestamp"]);
+                   echo "</td>";
+                   echo ("</tr>");
+                }
+            ?>
             </table>  
 
-            <input class="input-block-level" type="text" id="Reply" placeholder="Reply">  
+            <input class="input-block-level" type="text" id="ReplyContent" placeholder="Reply">  
             <button id="submitreply" class="btn " type="button" onclick="AjaxReply();">確認</button>
 
         </div>  
@@ -51,25 +71,14 @@
     <script src="<?=base_url("/js/bootstrap-collapse.js")?>"></script>
     <script src="<?=base_url("/js/bootstrap-carousel.js")?>"></script>
     <script src="<?=base_url("/js/bootstrap-typeahead.js")?>"></script>
-<?php
-
-$data =json_decode('{"UserID":1,"reply":"asda","PostID":3}',true);
-print_r ($data);
-echo ($data['UserID']);
-//echo (($data['UserID']+";"+$data['reply']+";"+$data['PostID']));
-?>
 
 <script type="text/javascript">
-    console.log("123");
     var URLS= 'http://localhost/cihw2/index.php/article/reply';
-    var Reply= $("#Reply").val();
+    var Reply= $('#ReplyContent').val();
     var UserID= $('#UserID').text();
     var PostID =$("#PostID").text();
+    console.log(Reply);
     var jsdata= {"UserID":UserID,"reply":Reply,"PostID":+PostID}; 
-    //console.log("js:"+jsdata);
-    //console.log(jsdata.UserID);
-    
-
 
     function AjaxReply() {   
         $.ajax({
@@ -78,10 +87,10 @@ echo ($data['UserID']);
             url: URLS,
             data: jsdata,
             success: function(data) { 
-                $('#Replies').append("<td>"+data.Author+":"+data.Content+"   "+data.Timestamp+"</td>");
+                $('#Replies').append("<tr><td class='span2'>"+data.Author+"</td><td class='span8'>"+data.Content+" </td><td class='span2'> "+data.Timestamp+"</td></tr>");
             },
             error : function(data) { 
-                console.log("F"+data); 
+                alert("error!"); 
             }
         });
     }//end AjaxReply
